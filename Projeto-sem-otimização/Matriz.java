@@ -54,11 +54,12 @@ class Matriz{
 	}
 
 	public void copiaMatriz(Matriz mat){
+		int conti,contj,numL, numC;
 		numL = this.getTamanhoLinha();
 		numC = this.getTamanhoColuna();
 		for(conti = 0; conti < numL; conti++){
 			for(contj = 0; contj < numC; contj++){
-				this.setValor(conti,contj,mat[conti][contj]);
+				this.setValor(conti,contj,mat.getValor(conti,contj));
 			}
 		}
 	}

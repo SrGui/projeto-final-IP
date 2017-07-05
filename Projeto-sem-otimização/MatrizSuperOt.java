@@ -54,11 +54,12 @@ class MatrizSuperOt{
 	}
 
 	public void copiaMatriz(Matriz mat){
+		int conti,contj,numL, numC;
 		numL = this.getTamanhoLinha();
 		numC = this.getTamanhoColuna();
 		for(conti = 0; conti < numL; conti++){
 			for(contj = 0; contj < numC; contj++){
-				this.setValor(conti,contj,mat[conti][contj]);
+				this.setValor(conti,contj,mat.getValor(conti,contj));
 			}
 		}
 	}
@@ -91,11 +92,11 @@ class MatrizSuperOt{
 		return ordem;
 	}	
 
-	private int detOrdem1(Matriz mat){
+	private int detOrdem1(MatrizSuperOt mat){
 		return mat.getValor(0,0);
 	}
 	
-	private int detOrdem2(Matriz mat){
+	private int detOrdem2(MatrizSuperOt mat){
 		int diagonalP, diagonalI;
 
 		diagonalP = mat.getValor(0,0) * mat.getValor(1,1);		
@@ -116,7 +117,7 @@ class MatrizSuperOt{
 		return sinal;		
 	}
 
-	private String maisZeros (Matriz mat){
+	private String maisZeros (MatrizSuperOt mat){
        int indiceC = 0, indiceL = 0, maiorC, maiorL, i, j, tempC = 0, tempL = 0, contC, contL;
        String resposta;
 		  contL = mat.getTamanhoLinha();
@@ -162,7 +163,7 @@ class MatrizSuperOt{
 		  }
 	  }
 
-	public void copiaMatrizMaiorParaMenor(Matriz maior,Matriz menor,int isqn,int jsqn){
+	public void copiaMatrizMaiorParaMenor(MatrizSuperOt maior,MatrizSuperOt menor,int isqn,int jsqn){
 		int contAi,contAj,contBi,contBj,temp,numL,numC;
 		numL = menor.getTamanhoLinha();
 		numC = menor.getTamanhoColuna();
@@ -185,7 +186,7 @@ class MatrizSuperOt{
 		}
 	}
 
-private int detZero(Matriz mat){
+private int detZero(MatrizSuperOt mat){
        int j, i, numL, numC, contC = 0, contL = 0,resposta = 0;
 	      numL = mat.getTamanhoLinha();
 		  numC = mat.getTamanhoColuna();
@@ -208,11 +209,11 @@ private int detZero(Matriz mat){
 			}
 			  
 
-	private int detOrdemN(Matriz mat){
+	private int detOrdemN(MatrizSuperOt mat){
 		int sinal,cofator,detTemp,resposta,cont,numL,numC,numero, detZero;
 		String cofatorMaisZero;
         char linhaoucoluna;
-		Matriz matmenor;
+		MatrizSuperOt matmenor;
 		numL = this.getTamanhoLinha();
 		numC = this.getTamanhoColuna();
 		detZero = this.detZero(mat);
@@ -222,7 +223,7 @@ private int detZero(Matriz mat){
 		}else{
 		    resposta = 0;
 		    for(cont = 0; cont < numL; cont++){
-			  matmenor = new Matriz(numL-1,numC-1);
+			  matmenor = new MatrizSuperOt(numL-1,numC-1);
 			  cofatorMaisZero = this.maisZeros(mat);
 	  		  numero = Integer.parseInt(String.valueOf(cofatorMaisZero.substring(0, 2)));;
 			  linhaoucoluna = cofatorMaisZero.charAt(2);
