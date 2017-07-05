@@ -1,6 +1,6 @@
 import java.util.Random;
 
-class Matriz{
+class MatrizSuperOt{
 	private int[][] mat;
 	private int tamLinha;
 	private int tamColuna;
@@ -53,6 +53,16 @@ class Matriz{
 		System.out.println();	
 	}
 
+	public void copiaMatriz(Matriz mat){
+		numL = this.getTamanhoLinha();
+		numC = this.getTamanhoColuna();
+		for(conti = 0; conti < numL; conti++){
+			for(contj = 0; contj < numC; contj++){
+				this.setValor(conti,contj,mat[conti][contj]);
+			}
+		}
+	}
+	
 	public void inicializaRandomico(){
 		int conti,contj, novoValor, mult, numL, numC;
 		Random gerador = new Random();
@@ -106,6 +116,52 @@ class Matriz{
 		return sinal;		
 	}
 
+	private String maisZeros (Matriz mat){
+       int indiceC = 0, indiceL = 0, maiorC, maiorL, i, j, tempC = 0, tempL = 0, contC, contL;
+       String resposta;
+		  contL = mat.getTamanhoLinha();
+		  contC = mat.getTamanhoColuna();
+		  for(i = 0; i < contL; i++){
+			  maiorC = 0;
+			  maiorL = 0;
+			  for(j = 0; j < contC; j++){
+				  if(this.getValor(i,j) == 0){
+					  maiorL++;
+				  }
+				  if(this.getValor(j,i) == 0){
+					  maiorC++;
+				  }
+			  }
+			  if(maiorL > tempL){
+				  indiceL = i;
+			  }
+			  if(maiorC > tempC){
+				  indiceC = i;
+			  }
+	           tempL = maiorL;
+				  tempC = maiorC;
+			  }
+		  if(indiceL >= indiceC){
+		
+		  		if (indiceL > 9){
+		  			resposta = indiceL + "L";	
+		  		} else {
+		  			resposta = "0" + indiceL + "L";
+		  		}
+		  	
+		  		return resposta;
+		  
+		}else{
+		  	if (indiceC > 9){
+		  			resposta = indiceC + "C";	
+		  		} else {
+		  			resposta = "0" + indiceC + "C";
+		  		}
+		  	
+		  		return resposta;
+		  }
+	  }
+
 	public void copiaMatrizMaiorParaMenor(Matriz maior,Matriz menor,int isqn,int jsqn){
 		int contAi,contAj,contBi,contBj,temp,numL,numC;
 		numL = menor.getTamanhoLinha();
@@ -129,22 +185,65 @@ class Matriz{
 		}
 	}
 
+private int detZero(Matriz mat){
+       int j, i, numL, numC, contC = 0, contL = 0,resposta = 0;
+	      numL = mat.getTamanhoLinha();
+		  numC = mat.getTamanhoColuna();
+		  for(i = 0; i < numL; i++){
+			  for(j = 0; j < numC; j++){
+				  if(this.getValor(i,j) == 0){
+					  contL++;
+				  }
+				  if(this.getValor(j,i) == 0){
+					  contC++;
+				  }
+			  }
+			}
+			  if(contC == numC & contL == numL){
+				  return(resposta);
+			  }else{
+			   resposta = -1;
+			   return(resposta);	
+			  }
+			}
+			  
+
 	private int detOrdemN(Matriz mat){
-		int sinal,cofator,detTemp,resposta,contC,numL,numC;
+		int sinal,cofator,detTemp,resposta,cont,numL,numC,numero, detZero;
+		String cofatorMaisZero;
+        char linhaoucoluna;
 		Matriz matmenor;
 		numL = this.getTamanhoLinha();
 		numC = this.getTamanhoColuna();
-		
-		resposta = 0;
-		for(contC = 0; contC < mat.getTamanhoColuna(); contC++){
-			cofator = mat.getValor(0,contC);
-			sinal = this.calculaSinal(0,contC);
-			matmenor = new Matriz(numL-1,numC-1);
-			this.copiaMatrizMaiorParaMenor(mat,matmenor,0,contC);
-			detTemp = matmenor.determinante();
-			resposta = resposta + (cofator * sinal * detTemp);
-		}
+		detZero = this.detZero(mat);
+		if(detZero == 0){
+          resposta = 0;
+          return (resposta);
+		}else{
+		    resposta = 0;
+		    for(cont = 0; cont < numL; cont++){
+			  matmenor = new Matriz(numL-1,numC-1);
+			  cofatorMaisZero = this.maisZeros(mat);
+	  		  numero = Integer.parseInt(String.valueOf(cofatorMaisZero.substring(0, 2)));;
+			  linhaoucoluna = cofatorMaisZero.charAt(2);
+			  if(linhaoucoluna == 'C'){
+			     cofator = mat.getValor(cont,numero);
+			     sinal = this.calculaSinal(cont,numero);
+			     this.copiaMatrizMaiorParaMenor(mat,matmenor,cont,numero);
+		      }else{
+		    	 cofator = mat.getValor(numero,cont);
+		    	 sinal = this.calculaSinal(numero,cont);
+		    	 this.copiaMatrizMaiorParaMenor(mat,matmenor,numero,cont);
+		       }
+		      if(cofator == 0){
+				resposta = resposta + 0;
+			  }else{
+			    detTemp = matmenor.determinante();
+			    resposta = resposta + (cofator * sinal * detTemp);
+		       }
+		     }
 		return (resposta);
+	    }
 	}
 
 	public int determinante(){

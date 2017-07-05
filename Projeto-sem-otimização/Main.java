@@ -6,18 +6,15 @@ class Main{
 		long inicio, fim, resultado;	
 
 		mat1 = new Matriz(12,12);
+		mat2 = new MatrizOt(12,12);
+		mat3 = new MatrizSuperOt(12,12);
+		
 		mat1.inicializaRandomico();
 		mat1.imprime();
-		inicio = System.nanoTime();
-		det = mat1.determinante();
-		fim = System.nanoTime();
-		resultado = fim - inicio;
-		System.out.println(det);
-		System.out.println(resultado);
-
-		
-
-
+		mat2.copiaMatriz(mat1);
+		mat2.imprime();
+		mat3.copiaMatriz(mat1);
+		mat3.imprime();
 	}
 
 }

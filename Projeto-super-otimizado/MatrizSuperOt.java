@@ -1,6 +1,6 @@
 import java.util.Random;
 
-class Matriz{
+class MatrizSuperOt{
 	private int[][] mat;
 	private int tamLinha;
 	private int tamColuna;

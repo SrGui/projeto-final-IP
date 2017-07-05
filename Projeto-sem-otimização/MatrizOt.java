@@ -1,6 +1,6 @@
 import java.util.Random;
 
-class Matriz{
+class MatrizOt{
 	private int[][] mat;
 	private int tamLinha;
 	private int tamColuna;
@@ -51,6 +51,16 @@ class Matriz{
 			}
 		}
 		System.out.println();	
+	}
+
+	public void copiaMatriz(Matriz mat){
+		numL = this.getTamanhoLinha();
+		numC = this.getTamanhoColuna();
+		for(conti = 0; conti < numL; conti++){
+			for(contj = 0; contj < numC; contj++){
+				this.setValor(conti,contj,mat[conti][contj]);
+			}
+		}
 	}
 
 	public void inicializaRandomico(){
