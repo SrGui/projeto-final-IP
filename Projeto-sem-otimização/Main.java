@@ -15,6 +15,8 @@ class Main{
 		mat1.inicializaRandomico();
 		mat2.copiaMatriz(mat1);
 		mat3.copiaMatriz(mat1);
+
+		System.out.println("--------Matriz 3x3--------")
 		
 		inicio = System.nanoTime();
 		det = mat1.determinante();
