@@ -53,12 +53,15 @@ class Matriz{
 		System.out.println();	
 	}
 
-	public void inicializaRandomico(int max_rand){
-		int conti,contj, novoValor;
+	public void inicializaRandomico(){
+		int conti,contj, novoValor, mult, numL, numC;
 		Random gerador = new Random();
-		for(conti = 0; conti < this.getTamanhoLinha(); conti++){
-			for(contj = 0; contj < this.getTamanhoColuna(); contj++){
-				novoValor = gerador.nextInt(max_rand);
+		numL = this.getTamanhoLinha();
+		numC = this.getTamanhoColuna();
+		for(conti = 0; conti < numL; conti++){
+			for(contj = 0; contj < numC; contj++){
+				mult = numL * numC;
+				novoValor = gerador.nextInt(mult);
 				this.setValor(conti,contj,novoValor);
 			}
 		}

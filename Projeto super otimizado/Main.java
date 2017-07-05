@@ -5,8 +5,8 @@ class Main{
 		int det;
 		long inicio, fim, resultado;	
 
-		mat1 = new Matriz(12,12);
-		mat1.inicializaRandomico(9);
+		mat1 = new Matriz(5,5);
+		mat1.inicializaRandomico();
 		mat1.imprime();
 		inicio = System.nanoTime();
 		det = mat1.determinante();

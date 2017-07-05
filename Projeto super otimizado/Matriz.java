@@ -53,12 +53,15 @@ class Matriz{
 		System.out.println();	
 	}
 
-	public void inicializaRandomico(int max_rand){
-		int conti,contj, novoValor;
+	public void inicializaRandomico(){
+		int conti,contj, novoValor, mult, numL, numC;
 		Random gerador = new Random();
-		for(conti = 0; conti < this.getTamanhoLinha(); conti++){
-			for(contj = 0; contj < this.getTamanhoColuna(); contj++){
-				novoValor = gerador.nextInt(max_rand);
+		numL = this.getTamanhoLinha();
+		numC = this.getTamanhoColuna();
+		for(conti = 0; conti < numL; conti++){
+			for(contj = 0; contj < numC; contj++){
+				mult = numL * numC;
+				novoValor = gerador.nextInt(mult);
 				this.setValor(conti,contj,novoValor);
 			}
 		}
@@ -172,37 +175,65 @@ class Matriz{
 		}
 	}
 
+private int detZero(Matriz mat){
+       int j, i, numL, numC, contC = 0, contL = 0,resposta = 0;
+	      numL = mat.getTamanhoLinha();
+		  numC = mat.getTamanhoColuna();
+		  for(i = 0; i < numL; i++){
+			  for(j = 0; j < numC; j++){
+				  if(this.getValor(i,j) == 0){
+					  contL++;
+				  }
+				  if(this.getValor(j,i) == 0){
+					  contC++;
+				  }
+			  }
+			}
+			  if(contC == numC & contL == numL){
+				  return(resposta);
+			  }else{
+			   resposta = -1;
+			   return(resposta);	
+			  }
+			}
+			  
+
 	private int detOrdemN(Matriz mat){
-		int sinal,cofator,detTemp,resposta,cont,numL,numC,numero;
+		int sinal,cofator,detTemp,resposta,cont,numL,numC,numero, detZero;
 		String cofatorMaisZero;
         char linhaoucoluna;
 		Matriz matmenor;
 		numL = this.getTamanhoLinha();
 		numC = this.getTamanhoColuna();
-		
-		resposta = 0;
-		for(cont = 0; cont < numL; cont++){
-			matmenor = new Matriz(numL-1,numC-1);
-			cofatorMaisZero = this.maisZeros(mat);
-			numero = Integer.parseInt(String.valueOf(cofatorMaisZero.substring(0, 2)));;
-			linhaoucoluna = cofatorMaisZero.charAt(2);
-			if(linhaoucoluna == 'C'){
-			cofator = mat.getValor(cont,numero);
-			sinal = this.calculaSinal(cont,numero);
-			this.copiaMatrizMaiorParaMenor(mat,matmenor,cont,numero);
-		    }else{
-		    	cofator = mat.getValor(numero,cont);
-		    	sinal = this.calculaSinal(numero,cont);
-		    	this.copiaMatrizMaiorParaMenor(mat,matmenor,numero,cont);
-		    }
-		    if(cofator == 0){
+		detZero = this.detZero(mat);
+		if(detZero == 0){
+          resposta = 0;
+          return (resposta);
+		}else{
+		    resposta = 0;
+		    for(cont = 0; cont < numL; cont++){
+			  matmenor = new Matriz(numL-1,numC-1);
+			  cofatorMaisZero = this.maisZeros(mat);
+	  		  numero = Integer.parseInt(String.valueOf(cofatorMaisZero.substring(0, 2)));;
+			  linhaoucoluna = cofatorMaisZero.charAt(2);
+			  if(linhaoucoluna == 'C'){
+			     cofator = mat.getValor(cont,numero);
+			     sinal = this.calculaSinal(cont,numero);
+			     this.copiaMatrizMaiorParaMenor(mat,matmenor,cont,numero);
+		      }else{
+		    	 cofator = mat.getValor(numero,cont);
+		    	 sinal = this.calculaSinal(numero,cont);
+		    	 this.copiaMatrizMaiorParaMenor(mat,matmenor,numero,cont);
+		       }
+		      if(cofator == 0){
 				resposta = resposta + 0;
-			}else{
-			detTemp = matmenor.determinante();
-			resposta = resposta + (cofator * sinal * detTemp);
-		    }
-		}
+			  }else{
+			    detTemp = matmenor.determinante();
+			    resposta = resposta + (cofator * sinal * detTemp);
+		       }
+		     }
 		return (resposta);
+	    }
 	}
 
 	public int determinante(){
