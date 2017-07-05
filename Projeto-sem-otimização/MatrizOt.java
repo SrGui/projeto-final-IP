@@ -5,13 +5,13 @@ class MatrizOt{
 	private int tamLinha;
 	private int tamColuna;
 
-	Matriz(){
+	MatrizOt(){
 		mat = new int[6][6];
 		this.setTamanhoLinha(6);	
 		this.setTamanhoColuna(6);
 	}
 
-	Matriz(int numLinhas, int numColunas){
+	MatrizOt(int numLinhas, int numColunas){
 		mat = new int[numLinhas][numColunas];
 		this.setTamanhoLinha(numLinhas);	
 		this.setTamanhoColuna(numColunas);

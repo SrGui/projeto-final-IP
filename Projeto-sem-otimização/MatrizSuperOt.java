@@ -5,13 +5,13 @@ class MatrizSuperOt{
 	private int tamLinha;
 	private int tamColuna;
 
-	Matriz(){
+	MatrizSuperOt(){
 		mat = new int[6][6];
 		this.setTamanhoLinha(6);	
 		this.setTamanhoColuna(6);
 	}
 
-	Matriz(int numLinhas, int numColunas){
+	MatrizSuperOt(int numLinhas, int numColunas){
 		mat = new int[numLinhas][numColunas];
 		this.setTamanhoLinha(numLinhas);	
 		this.setTamanhoColuna(numColunas);
@@ -62,7 +62,7 @@ class MatrizSuperOt{
 			}
 		}
 	}
-	
+
 	public void inicializaRandomico(){
 		int conti,contj, novoValor, mult, numL, numC;
 		Random gerador = new Random();
